@@ -1,0 +1,38 @@
+services:
+  nginx:
+    container_name: nginx
+    build: ./srcs/nginx
+    depends_on:
+      - wordpress
+    ports:
+      - '443:443'
+      - '80:80'
+    networks:
+      - frontend
+  wordpress:
+    container_name: wordpress
+    build: ./srcs/wordpress
+    depends_on:
+      - mariadb
+    ports:
+      - 9000:9000
+    volumes:
+      - ./tools:/app
+    env_file:
+      - .env
+    networks:
+      - backend
+      - frontend
+  mariadb:
+    container_name: mariadb
+    build: ./srcs/mariadb
+    ports:
+      - "3306:3306"
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - backend
+networks:
+  frontend:
+  backend:
