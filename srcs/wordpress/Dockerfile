@@ -11,24 +11,29 @@ RUN apk add php-mysqli \
             curl php  \
             php-fpm  \
             php-phar \
-            php-json			\
-            php-mysqli			\
+            php-json		\
+            php-mysqli		\
             php-mysqlnd		\
             php-openssl		\
             php-pdo			\
-            php-pdo_mysql		\
-            php-pdo_pgsql		\
+            php-gd			\
+            php-cli			\
+            php-pdo_mysql	\
+            php-pdo_pgsql	\
             php-pdo_sqlite 	\
-            php-pgsql			\
-            php-phar			\
-            php-posix			\
+            php-pgsql		\
+            php-phar		\
+            php-posix		\
             php-session		\
             php-sockets		\
-            php-sodium			\
+            php-sodium		\
             php-sqlite3		\
             php-xsl			\
             php-zip			\
-            php-zlib			
+            php-zlib		\
+            php-iconv 	    \
+            php-opcache     \
+            mariadb 
 
 RUN chmod +x ./script.sh
 

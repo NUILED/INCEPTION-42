@@ -5,17 +5,22 @@ mkdir -p /run/mysqld
 
 chown -R mysql:mysql /run/mysqld
 
-sleep 200000
 chown -R mysql:mysql /var/lib/mysql
 mkdir -p /run/openrc/
 touch /run/openrc/softlevel
 
 # chown -R mysql:mysql /auth_pam_tool_dir
-rm -rf /var/lib/mysql/*
-mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql > /dev/null
+#mysql_secure_installation --basedir=/usr --datadir=/var/lib/mysql --user=mysql 
 rc-service mariadb setup
+echo "USE mysql;
+FLUSH PRIVILEGES;
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'PWD';
+CREATE DATABASE WP CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE USER 'USR'@'%' IDENTIFIED by 'PWD';
+GRANT ALL PRIVILEGES ON WP.* TO 'USR'@'%';
+FLUSH PRIVILEGES;" > /tmp/file
 
-
+mysqld --user=mysql --bootstrap < /tmp/file
 
 # #!/bin/sh
 # #!/bin/sh
@@ -30,11 +35,8 @@ rc-service mariadb setup
 # 	# run init.sql
 
 # # allow remote connections
-# sed -i "s|skip-networking|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
-# sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
-mysqld --initialize --user=mysql
-mysql -u root -e "FLUSH PRIVILEGES;ALTER USER 'root'@'localhost';CREATE DATABASE WP ;CREATE USER 'USR'@'%' IDENTIFIED by 'PWD';GRANT ALL PRIVILEGES ON WP.* TO 'USR'@'%';"
-#pkill mysqld
+sed -i "s|skip-networking|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
+ sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
 mysqld --user=mysql --console 
 #mysqld --user=mysql --console
 

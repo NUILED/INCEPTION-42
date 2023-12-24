@@ -1,9 +1,10 @@
 FROM alpine:3.18
 
-RUN	apk update && apk upgrade && apk add --no-cache \
+RUN apk add openrc && apk add --no-cache \
         mariadb \
-        mariadb-client
+        mariadb-client \
+        openrc
         
-COPY tools/configure.sh /tmp/configure.sh
+COPY tools/* /tmp/
 
 ENTRYPOINT ["sh","/tmp/script.sh"]
