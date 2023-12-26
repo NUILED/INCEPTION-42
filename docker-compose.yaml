@@ -8,7 +8,7 @@ services:
       - '443:443'
       - '80:80'
     networks:
-      - frontend
+      - inception
   wordpress:
     container_name: wordpress
     build: ./srcs/wordpress
@@ -21,8 +21,7 @@ services:
     env_file:
       - .env
     networks:
-      - backend
-      - frontend
+      - inception
   mariadb:
     container_name: mariadb
     build: ./srcs/mariadb
@@ -32,7 +31,12 @@ services:
     env_file:
       - .env
     networks:
-      - backend
+      - inception
 networks:
-  frontend:
-  backend:
+  inception:
+    name: "inception"
+secrets:
+   db_password:
+     file: db_password.txt
+   db_root_password:
+     file: db_root_password.txt

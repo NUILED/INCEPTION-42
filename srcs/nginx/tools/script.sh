@@ -4,9 +4,13 @@ apk update
 mkdir -p /www
 
 adduser -D -g 'www' www
+
 chown -R www:www /var/lib/nginx
+
 chown -R www:www /www
-apk add nginx 
+
+apk add nginx
+
 apk add openrc 
 
 apk add openssl 
