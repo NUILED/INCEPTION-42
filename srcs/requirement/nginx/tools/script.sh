@@ -1,8 +1,6 @@
 
 apk update 
 
-mkdir -p /www
-
 adduser -D -g 'www' www
 
 chown -R www:www /var/lib/nginx

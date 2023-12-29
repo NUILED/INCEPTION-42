@@ -1,0 +1,67 @@
+services:
+  nginx:
+    container_name: nginx
+    build: ./srcs/requirement/nginx
+    depends_on:
+      - wordpress
+    ports:
+      - '443:443'
+      - '80:80'
+    networks:
+      - inception
+    volumes:
+      - wp:/var/www/html
+  wordpress:
+    container_name: wordpress
+    build: ./srcs/requirement/wordpress
+    depends_on:
+      - mariadb
+    ports:
+      - 9000:9000
+    volumes:
+      - wp:/var/www/html
+    env_file:
+      - .env
+    networks:
+      - inception
+  mariadb:
+    container_name: mariadb
+    build: ./srcs/requirement/mariadb
+    ports:
+      - "3306:3306"
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - inception
+  redis:
+    container_name: redis
+    depends_on:
+      - wordpress
+    build: ./srcs/requirement/redis
+    ports:
+      - 6379:6379
+      - "600:80"
+    restart: always
+    volumes:
+      - wp:/var/www/html
+    env_file:
+      - .env
+    networks:
+      - inception
+networks:
+  inception:
+volumes:
+  wp:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/aoutifra/Desktop/data/wp
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/aoutifra/Desktop/data/db
