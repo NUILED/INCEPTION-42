@@ -6,7 +6,6 @@ services:
       - wordpress
     ports:
       - '443:443'
-      - '80:80'
     networks:
       - inception
     volumes:
@@ -27,6 +26,8 @@ services:
   mariadb:
     container_name: mariadb
     build: ./srcs/requirement/mariadb
+    volumes:
+      - db:/var/lib/mysql
     ports:
       - "3306:3306"
     restart: always
@@ -34,34 +35,23 @@ services:
       - .env
     networks:
       - inception
-  redis:
-    container_name: redis
-    depends_on:
-      - wordpress
-    build: ./srcs/requirement/redis
-    ports:
-      - 6379:6379
-      - "600:80"
-    restart: always
-    volumes:
-      - wp:/var/www/html
-    env_file:
-      - .env
-    networks:
-      - inception
+
 networks:
   inception:
+
 volumes:
   wp:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /Users/aoutifra/Desktop/data/wp
-volumes:
+      device: /Users/aoutifra/data/wp
   db:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /Users/aoutifra/Desktop/data/db
+      device: /Users/aoutifra/data/db
+
+
+

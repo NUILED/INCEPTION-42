@@ -2,9 +2,14 @@ FROM alpine:3.18
 
 RUN apk add openrc && apk add --no-cache \
         mariadb \
-        mariadb-client \
-        openrc
+        mariadb-client 
         
-COPY tools/* /tmp/
+COPY ./conf /tmp/file
 
-ENTRYPOINT ["sh","/tmp/script.sh"]
+COPY ./tools/mariadb.sh ./
+
+RUN chmod +x /mariadb.sh
+
+RUN /bin/sh mariadb.sh
+
+ENTRYPOINT ["/usr/bin/mysqld", "--user=mysql", "--console"]

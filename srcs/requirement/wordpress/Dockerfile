@@ -46,4 +46,4 @@ RUN chmod +x ./script.sh
 
 EXPOSE 9000
 
-CMD ["/bin/sh","script.sh"]
+CMD ["/bin/sh","./script.sh"]
