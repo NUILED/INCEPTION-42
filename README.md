@@ -14,8 +14,9 @@ Volumes: Create volumes for WordPress database and website files.
 Docker Network: Establish a network connection between your containers without using deprecated methods like network: host, --link, or links: in docker-compose.yml.
 Security and Best Practices: Adhere to security best practices, such as no passwords in Dockerfiles and using environment variables (preferably stored in a .env file).
 Directory Structure
+
 /
-├── Makefile
+├── Makefile 
 └── srcs
     ├── docker-compose.yml
     ├── .env
@@ -33,6 +34,7 @@ Directory Structure
         │   ├── .dockerignore
         │   └── ...
         └── ...
+
 .env File Example
 makefile
 
