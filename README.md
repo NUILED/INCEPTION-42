@@ -40,9 +40,12 @@ DOMAIN_NAME=wil.1337.ma
 # Certificates Path
 CERTS_=./path_to_certs
 # MySQL Configuration
-MYSQL_ROOT_PASSWORD=secret_root_password
+MYSQL_ROOT_PASSWORD = secret_root_password
+
 MYSQL_USER=wordpress_user
+
 MYSQL_PASSWORD=wordpress_password
+
 # Other environment variables
 ...
 Important Notes
