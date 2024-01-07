@@ -16,10 +16,8 @@ Security and Best Practices: Adhere to security best practices, such as no passw
 Directory Structure
 
 /
-├── Makefile 
-|
-└── srcs
-    |
+├── Makefile
+└── srcs 
     ├── docker-compose.yml
     ├── .env
     └── requirements
