@@ -17,7 +17,9 @@ Directory Structure
 
 /
 ├── Makefile 
+|
 └── srcs
+    |
     ├── docker-compose.yml
     ├── .env
     └── requirements
